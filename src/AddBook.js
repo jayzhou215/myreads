@@ -9,23 +9,23 @@ class AddBook extends Component {
     books : []
   }
 
-  // timeout = null
-
   componentDidMount() {
 
   }
 
-  updateBook = (id, shelf) => {
-    this.props.updateBook(id, shelf)
+  updateBook = (book, shelf) => {
+    book.shelf = shelf
+    this.setState(state=>({books:state.books}))
+    this.props.updateBook(book, shelf)
   }
 
   handleChange = (event) => {
     const value = event.target.value
     clearTimeout(this.timeout)
     this.timeout = setTimeout(() => {
-      BooksAPI.search(value, 20).then(books=>{
-        console.log(books)
-        this.setState({books:books})
+      BooksAPI.search(value, 20).then(result=>{
+        console.log(result)
+        this.setState({books: ((result === undefined || result.error) ? []: result)})
       })
     }, 500);
   }
@@ -48,10 +48,9 @@ class AddBook extends Component {
             <input type="text" placeholder="Search by title or author" onChange={this.handleChange}/>
 
           </div>
-          <BookShelf title='' books={this.state.books} updateBook={this.updateBook}/>
         </div>
         <div className="search-books-results">
-          <ol className="books-grid"></ol>
+          <BookShelf title='' books={this.state.books} updateBook={this.updateBook}/>
         </div>
     </div>
     )

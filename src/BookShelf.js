@@ -3,8 +3,12 @@ import Book from './Book'
 class BookShelf extends Component {
 
 
-  updateBook = (id, shelf) => {
-    this.props.updateBook(id, shelf)
+  updateBook = (book, shelf) => {
+    this.props.updateBook(book, shelf)
+  }
+
+  componentWillMount() {
+
   }
 
   render() {
@@ -16,7 +20,8 @@ class BookShelf extends Component {
         <div className="bookshelf-books">
           <ol className="books-grid">
             {
-              this.props.books.map(bk=>(
+
+              this.props.books && this.props.books.map(bk=>(
                 <li key={bk.id}>
                   <Book book={bk} updateBook={this.updateBook}/>
                 </li>

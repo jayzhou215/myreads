@@ -4,7 +4,7 @@ class Book extends Component {
   handleChanged = (event) => {
     const book = this.props.book
     if (book.shelf !== event.target.value) {
-      this.props.updateBook(book.id, event.target.value)
+      this.props.updateBook(book, event.target.value)
     }
   }
 
