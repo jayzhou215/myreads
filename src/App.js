@@ -13,9 +13,12 @@ class BooksApp extends React.Component {
   updateBook = (id, shelf) => {
     this.state.books.map(book=>{
       if (book.id === id) {
-        BooksAPI.update(book, shelf).then(result =>{
-          console.log(result)
-          this.refresh()
+        BooksAPI.update(book, shelf).then(shelfs =>{
+          // todo:how to know is the result is ok
+          book.shelf = shelf
+          this.setState({
+            books:this.state.books
+          })
         })
         return true
       }
@@ -23,7 +26,7 @@ class BooksApp extends React.Component {
     })
   }
 
-  refresh(){
+  refreshFromServer(){
     BooksAPI.getAll().then(books=>(
       this.setState({
         books: books
@@ -32,7 +35,7 @@ class BooksApp extends React.Component {
   }
 
   componentDidMount() {
-    this.refresh()
+    this.refreshFromServer()
   }
 
   render() {
