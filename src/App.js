@@ -10,7 +10,20 @@ class BooksApp extends React.Component {
     books:[]
   }
 
-  componentDidMount() {
+  updateBook = (id, shelf) => {
+    this.state.books.map(book=>{
+      if (book.id === id) {
+        BooksAPI.update(book, shelf).then(result =>{
+          console.log(result)
+          this.refresh()
+        })
+        return true
+      }
+      return false
+    })
+  }
+
+  refresh(){
     BooksAPI.getAll().then(books=>(
       this.setState({
         books: books
@@ -18,11 +31,15 @@ class BooksApp extends React.Component {
     ))
   }
 
+  componentDidMount() {
+    this.refresh()
+  }
+
   render() {
     return (
       <div className="app">
         <Route exact path='/' render={()=>(
-            <ListBooks books={this.state.books}/>
+            <ListBooks books={this.state.books} updateBook={this.updateBook}/>
           )} />
         <Route path='/search' component={AddBook} />
       </div>
