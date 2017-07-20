@@ -24,7 +24,6 @@ class AddBook extends Component {
     clearTimeout(this.timeout)
     this.timeout = setTimeout(() => {
       BooksAPI.search(value, 20).then(result=>{
-        console.log(result)
         if (result === undefined || result.error) {
           this.setState({books:[]})
           return
