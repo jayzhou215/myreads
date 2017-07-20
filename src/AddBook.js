@@ -25,9 +25,27 @@ class AddBook extends Component {
     this.timeout = setTimeout(() => {
       BooksAPI.search(value, 20).then(result=>{
         console.log(result)
-        this.setState({books: ((result === undefined || result.error) ? []: result)})
+        if (result === undefined || result.error) {
+          this.setState({books:[]})
+          return
+        }
+        this.updateSearchResultBooksWithShelfBooks(result, this.props.books)
+        this.setState({books : result})
       })
     }, 500);
+  }
+
+  updateSearchResultBooksWithShelfBooks = (searchBooks, shelfBooks) => {
+    searchBooks.map(searchBook => {
+      shelfBooks.map(shelfBook => {
+        if (shelfBook.id === searchBook.id) {
+          searchBook.shelf = shelfBook.shelf
+          return true
+        }
+        return false
+      })
+      return true
+    })
   }
 
   render(){

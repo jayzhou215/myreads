@@ -17,11 +17,12 @@ class BooksApp extends React.Component {
   }
 
   refreshFromServer(){
-    BooksAPI.getAll().then(books=>(
+    BooksAPI.getAll().then(books=>{
       this.setState({
         books: books
       })
-    ))
+
+    })
   }
 
   componentDidMount() {
@@ -35,7 +36,7 @@ class BooksApp extends React.Component {
             <ListBooks books={this.state.books} updateBook={this.updateBook}/>
           )} />
         <Route path='/search' render={()=>(
-            <AddBook updateBook={this.updateBook}/>
+            <AddBook books={this.state.books} updateBook={this.updateBook}/>
           )} />
       </div>
     )
