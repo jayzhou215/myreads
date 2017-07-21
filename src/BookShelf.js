@@ -2,38 +2,30 @@ import React, { Component } from 'react'
 import Book from './Book'
 import randomize from 'randomatic'
 
-class BookShelf extends Component {
-
-  updateBook = (book, shelf) => {
-    this.props.updateBook(book, shelf)
+function BookShelf(props) {
+  const updateBook = (book, shelf) => {
+    props.updateBook(book, shelf)
   }
 
-  componentWillMount() {
+  return (
+    <div className="bookshelf">
+      { props.title && (
+        <h2 className="bookshelf-title">{props.title}</h2>
+      )}
+      <div className="bookshelf-books">
+        <ol className="books-grid">
+          {
 
-  }
-
-  render() {
-    return (
-      <div className="bookshelf">
-        { this.props.title && (
-          <h2 className="bookshelf-title">{this.props.title}</h2>
-        )}
-        <div className="bookshelf-books">
-          <ol className="books-grid">
-            {
-
-              this.props.books && this.props.books.map(bk=>(
-                <li key={bk.id + '-' + randomize('*', 10)}>
-                  <Book book={bk} updateBook={this.updateBook}/>
-                </li>
-              ))
-            }
-          </ol>
-        </div>
+            props.books && props.books.map(bk=>(
+              <li key={bk.id + '-' + randomize('*', 10)}>
+                <Book book={bk} updateBook={updateBook}/>
+              </li>
+            ))
+          }
+        </ol>
       </div>
-    )
-  }
-
+    </div>
+  )
 }
 
 export default BookShelf

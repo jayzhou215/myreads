@@ -9,10 +9,6 @@ class AddBook extends Component {
     books : []
   }
 
-  componentDidMount() {
-
-  }
-
   updateBook = (book, shelf) => {
     book.shelf = shelf
     this.setState(state=>({books:state.books}))
