@@ -29,7 +29,9 @@ class AddBook extends Component {
           return
         }
         this.updateSearchResultBooksWithShelfBooks(result, this.props.books)
-        this.setState({books : result})
+        if (result !== this.state.books) {
+          this.setState({books : result})
+        }
       })
     }, 500);
   }
