@@ -28,4 +28,10 @@ function BookShelf(props) {
   )
 }
 
+BookShelf.propTypes = {
+  title:React.PropTypes.string.isRequired,
+  books:React.PropTypes.object.isRequired,
+  updateBook:React.PropTypes.func.isRequired
+}
+
 export default BookShelf

@@ -30,4 +30,10 @@ function ListBooks (props) {
 
 }
 
+ListBooks.propTypes = {
+  books:React.PropTypes.object.isRequired,
+  updateBook:React.PropTypes.func.isRequired
+}
+
+
 export default ListBooks

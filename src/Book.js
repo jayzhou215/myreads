@@ -29,4 +29,10 @@ function Book (props) {
   )
 }
 
+Book.propTypes = {
+  book:React.PropTypes.object.isRequired,
+  updateBook:React.PropTypes.func.isRequired
+}
+
+
 export default Book

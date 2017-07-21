@@ -73,4 +73,9 @@ class AddBook extends Component {
 
 }
 
+AddBook.propTypes = {
+  books:React.PropTypes.object.isRequired,
+  updateBook:React.PropTypes.func.isRequired
+}
+
 export default AddBook
