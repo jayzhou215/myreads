@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import Book from './Book'
-class BookShelf extends Component {
+import randomize from 'randomatic'
 
+class BookShelf extends Component {
 
   updateBook = (book, shelf) => {
     this.props.updateBook(book, shelf)
@@ -22,7 +23,7 @@ class BookShelf extends Component {
             {
 
               this.props.books && this.props.books.map(bk=>(
-                <li key={bk.id + '-' + bk.title}>
+                <li key={bk.id + '-' + randomize('*', 10)}>
                   <Book book={bk} updateBook={this.updateBook}/>
                 </li>
               ))
